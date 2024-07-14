@@ -1,4 +1,4 @@
-name: Autoupdate Floorp version
+name: Autoupdate Crave version
 on:
   schedule:
      - cron: '0 0 */10 * *' # This runs every 10 days
@@ -11,10 +11,10 @@ jobs:
        - name: Checkout repository
          uses: actions/checkout@v4
 
-       - name: Check for new Floorp releases
+       - name: Check for new Crave releases
          id: check_release
          run: |
-          latest_release=$(curl -s https://api.github.com/repos/Floorp-Projects/Floorp/releases/latest | jq -r '.tag_name')
+          latest_release=$(curl -s https://api.github.com/repos/accupara/crave/releases/latest | jq -r '.tag_name')
           latest_release_no_v=$(echo $latest_release | sed 's/^v//')
 
           if [ ! -f latest_version.txt ]; then
@@ -33,36 +33,36 @@ jobs:
             echo "No New Updates found"
             exit 1
           fi
-       - name: Update _service and floorp-brower-nosrc.spec
+       - name: Update _service and crave.spec
          run: |
-          echo "Updating _service and floorp-brower-nosrc.spec with the new release URL"
+          echo "Updating _service and crave.spec with the new release URL"
           echo "Doing changelog"
-          FLOORP_BUILD_DATE=$(date "+%b %d %Y")
-          echo "Build Date: $FLOORP_BUILD_DATE"
-          FLOORP_BUILD_DAY=$(date "+%a")
-          echo "Build Day: $FLOORP_BUILD_DAY"
-          FLOORP_BUILD_YEAR=$(date "+%Y") 
-          echo "Build Year: $FLOORP_BUILD_YEAR" 
-          export FLOORP_VER=${latest_release}
-          export FLOORP_VER_NO_V=$(echo $FLOORP_VER | sed 's/^v//')
-          changelog_entry="* ${FLOORP_BUILD_DAY} ${FLOORP_BUILD_DATE} tex - ${FLOORP_VER_NO_V}-1pclos${FLOORP_BUILD_YEAR}"
+          CRAVE_BUILD_DATE=$(date "+%b %d %Y")
+          echo "Build Date: $CRAVE_BUILD_DATE"
+          CRAVE_BUILD_DAY=$(date "+%a")
+          echo "Build Day: $CRAVE_BUILD_DAY"
+          CRAVE_BUILD_YEAR=$(date "+%Y") 
+          echo "Build Year: $CRAVE_BUILD_YEAR" 
+          export CRAVE_VER=${latest_release}
+          export CRAVE_VER_NO_V=$(echo $CRAVE_VER | sed 's/^v//')
+          changelog_entry="* ${CRAVE_BUILD_DAY} ${CRAVE_BUILD_DATE} tex - ${CRAVE_VER_NO_V}-1pclos${CRAVE_BUILD_YEAR}"
           echo "$changelog_entry"
-          if grep -q "$changelog_entry" floorp-brower-nosrc.spec.example; then
+          if grep -q "$changelog_entry" crave.spec.example; then
             echo "Entry already exists, skipping"
           else
-            sed -i "/%changelog/a $changelog_entry" floorp-brower-nosrc.spec.example 
-            sed -i "/$changelog_entry/a - new version\n" floorp-brower-nosrc.spec.example
+            sed -i "/%changelog/a $changelog_entry" crave.spec.example 
+            sed -i "/$changelog_entry/a - new version\n" crave.spec.example
           fi           
           echo "Increment example changelog"
           git config --global user.name 'sounddrill31'
           git config --global user.email 'sounddrill31@gmail.com'
           git add .
-          git commit -m "Update Floorp browser to latest release"
+          git commit -m "Update Crave to latest release"
           git push         
           echo "Using new version"
-          envsubst < ${PWD}/floorp-brower-nosrc.spec.example >> ${PWD}/floorp-brower-nosrc.spec
+          envsubst < ${PWD}/crave.spec.example >> ${PWD}/crave.spec
           envsubst < ${PWD}/_service.example >> ${PWD}/_service
-          rm _service.example floorp-brower-nosrc.spec.example
+          rm _service.example crave.spec.example
          env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   
@@ -72,7 +72,7 @@ jobs:
           git config --global user.name 'sounddrill31'
           git config --global user.email 'sounddrill31@gmail.com'
           git add .
-          git commit -m "Update Floorp browser to latest release"
+          git commit -m "Update Crave to latest release"
           git push -f --set-upstream origin $latest_release
        - name: Install build dependencies
          run: |
@@ -83,7 +83,7 @@ jobs:
          run: mkdir -p ~/.config/osc; touch ~/.config/osc/oscrc; echo "${{ secrets.OSCRC }}" > ~/.config/osc/oscrc
        - name: Trigger Build
          run:  |
-          osc -A https://api.opensuse.org checkout home:sounddrill/floorp-browser && cd $_  
+          osc -A https://api.opensuse.org checkout home:sounddrill/Crave && cd $_  
           mv ${{ github.workspace }}/* . -f || true
           rm -rf .git
           osc add *

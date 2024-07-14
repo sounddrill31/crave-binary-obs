@@ -1,8 +1,14 @@
 <services>
-  <service name="download_url">
+  <service name="download_url_arm64">
     <param name="host">github.com</param>
     <param name="protocol">https</param>
-    <param name="path">/Floorp-Projects/Floorp/releases/download/${FLOORP_VER}/floorp-${FLOORP_VER_NO_V}.linux-x86_64.tar.bz2</param>
-    <param name="filename">floorp-${FLOORP_VER_NO_V}.linux-x86_64.tar.bz2</param>
+    <param name="path">/accupara/crave/releases/download/${CRAVE_VER}/crave-${CRAVE_VER_NO_V}-linux-aarch64.bin</param>
+    <param name="filename">crave-${CRAVE_VER_NO_V}-linux-aarch64.bin</param>
+  </service>
+  <service name="download_url_amd64">
+    <param name="host">github.com</param>
+    <param name="protocol">https</param>
+    <param name="path">/accupara/crave/releases/download/${CRAVE_VER}/crave-${CRAVE_VER_NO_V}-linux-amd64.bin</param>
+    <param name="filename">crave-${CRAVE_VER_NO_V}-linux-amd64.bin</param>
   </service>
 </services>
