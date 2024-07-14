@@ -58,7 +58,11 @@ jobs:
           git config --global user.email 'sounddrill31@gmail.com'
           git add .
           git commit -m "Update Crave to latest release"
-          git push         
+
+          if [[ -n "${{ secrets.TESTING }}" ]]; then
+            git push         
+          fi
+
           echo "Using new version"
           envsubst < ${PWD}/crave.spec.example >> ${PWD}/crave.spec
           envsubst < ${PWD}/_service.example >> ${PWD}/_service
