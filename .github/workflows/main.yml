@@ -87,8 +87,10 @@ jobs:
          run: mkdir -p ~/.config/osc; touch ~/.config/osc/oscrc; echo "${{ secrets.OSCRC }}" > ~/.config/osc/oscrc
        - name: Trigger Build
          run:  |
+          WRKSPACE=$(mktemp -d /tmp/upload-files.XXXXXX)
+          mv ${{ github.workspace }}/* $WRKSPACE/ -f || true
           osc -A https://api.opensuse.org checkout home:sounddrill/Crave && cd $_  
-          mv ${{ github.workspace }}/* . -f || true
+          mv $WRKSPACE/* . -f || true
           rm -rf .git
           osc add *
           osc ci -m "Version bump to $latest_release"
