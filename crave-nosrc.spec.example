@@ -9,7 +9,7 @@
 
 Summary:    Crave
 Name:       crave
-Version:    %{CRAVE_VER_NO_V}
+Version:    ${CRAVE_VER_NO_V}
 Release:    1
 License:    MPL-2.0
 Group:      Productivity
@@ -59,7 +59,3 @@ fi
 Requires: openssh, rsync, openssl
 
 %changelog
-* Wed Jul 17 2024 tex - 0.2-7004-1pclos2024
-- new version
-
-
