@@ -25,22 +25,22 @@ BuildRequires:  openssl
 ExclusiveArch:  x86_64 aarch64
 
 %description
-Unofficial Community Build. Build any open source project in secondszzzzz
+Unofficial Community Build. Build any open source project in seconds
 
 %prep
 cd %_builddir
-mkdir -p aarch64 amd64
-mv %{SOURCE0} %{_builddir}/aarch64
-mv %{SOURCE1} %{_builddir}/amd64
+mkdir -p %{cravedir}
+mv %{SOURCE0} %{cravedir}/
+mv %{SOURCE1} %{cravedir}/
 
 %build
 #nobuild
 
 %install
 if [ "$(uname -m)" = "x86_64" ]; then
-    mv %{SOURCE0} %{_bindir}/crave
+    install -D %{cravedir}/crave-%{version}-linux-amd64.bin %{buildroot}%{_bindir}/crave
 elif [ "$(uname -m)" = "aarch64" ]; then
-    mv %{SOURCE1} %{_bindir}/crave
+    install -D %{cravedir}/crave-%{version}-linux-aarch64.bin %{buildroot}%{_bindir}/crave
 fi
 
 %post
@@ -51,10 +51,10 @@ fi
 
 %files
 %defattr(-,root,root)
-%{_bindir}/*
-%dir %{_libdir}/%{oname}
-%{_libdir}/%{oname}/aarch64
-%{_libdir}/%{oname}/amd64
+%{_bindir}/crave
+%dir %{cravedir}
+%{cravedir}/crave-%{version}-linux-aarch64.bin
+%{cravedir}/crave-%{version}-linux-amd64.bin
 
 Requires: openssh, rsync, openssl
 
@@ -70,6 +70,3 @@ Architecture: x86_64
 Depends:     openssh, rsync, openssl
 
 %changelog
-* Sun Jul 14 2024 tex - 0.2-7004-1pclos2024
-- new version
-
