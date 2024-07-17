@@ -45,7 +45,7 @@ jobs:
           echo "Build Year: $CRAVE_BUILD_YEAR" 
           export CRAVE_VER=${latest_release}
           export CRAVE_VER_NO=${CRAVE_VER%-*}
-          export RELEASE_ID=${CRAVE_VER#*-}
+          export RELEASE_ID=${CRAVE_VER##*-}
           changelog_entry="* ${CRAVE_BUILD_DAY} ${CRAVE_BUILD_DATE} tex - ${CRAVE_VER_NO}-1pclos${CRAVE_BUILD_YEAR}"
           echo "$changelog_entry"
           if grep -q "$changelog_entry" crave-nosrc.spec.example; then
