@@ -9,8 +9,8 @@
 
 Summary:    Crave
 Name:       crave
-Version:    ${CRAVE_VER_NO}
-Release:    ${RELEASE_ID}
+Version:    0.2
+Release:    7004
 License:    MPL-2.0
 Group:      Productivity
 URL:        https://crave.io/
