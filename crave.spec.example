@@ -70,3 +70,6 @@ Architecture: x86_64
 Depends:     openssh, rsync, openssl
 
 %changelog
+* Wed Jul 17 2024 tex - 0.2-7004-1pclos2024
+- new version
+
