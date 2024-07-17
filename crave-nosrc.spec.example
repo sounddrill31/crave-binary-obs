@@ -58,18 +58,6 @@ fi
 
 Requires: openssh, rsync, openssl
 
-# Debian packaging
-%package -n crave-aarch64
-Summary:    Crave (aarch64)
-Architecture: aarch64
-Depends:     openssh, rsync, openssl
-
-%package -n crave-amd64
-Summary:    Crave (amd64)
-Architecture: x86_64
-Depends:     openssh, rsync, openssl
-
 %changelog
-* Wed Jul 17 2024 tex - 0.2-7004-1pclos2024
-- new version
+
 

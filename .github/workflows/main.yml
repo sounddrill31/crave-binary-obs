@@ -33,9 +33,9 @@ jobs:
             echo "No New Updates found"
             exit 1
           fi
-       - name: Update _service and crave.spec
+       - name: Update _service and crave-nosrc.spec
          run: |
-          echo "Updating _service and crave.spec with the new release URL"
+          echo "Updating _service and crave-nosrc.spec with the new release URL"
           echo "Doing changelog"
           CRAVE_BUILD_DATE=$(date "+%b %d %Y")
           echo "Build Date: $CRAVE_BUILD_DATE"
@@ -47,11 +47,11 @@ jobs:
           export CRAVE_VER_NO_V=$(echo $CRAVE_VER | sed 's/^v//')
           changelog_entry="* ${CRAVE_BUILD_DAY} ${CRAVE_BUILD_DATE} tex - ${CRAVE_VER_NO_V}-1pclos${CRAVE_BUILD_YEAR}"
           echo "$changelog_entry"
-          if grep -q "$changelog_entry" crave.spec.example; then
+          if grep -q "$changelog_entry" crave-nosrc.spec.example; then
             echo "Entry already exists, skipping"
           else
-            sed -i "/%changelog/a $changelog_entry" crave.spec.example 
-            sed -i "/$changelog_entry/a - new version\n" crave.spec.example
+            sed -i "/%changelog/a $changelog_entry" crave-nosrc.spec.example 
+            sed -i "/$changelog_entry/a - new version\n" crave-nosrc.spec.example
           fi           
           echo "Increment example changelog"
           git config --global user.name 'sounddrill31'
@@ -60,9 +60,9 @@ jobs:
           git commit -m "Update Crave to latest release"
           git push         
           echo "Using new version"
-          envsubst < ${PWD}/crave.spec.example >> ${PWD}/crave.spec
+          envsubst < ${PWD}/crave-nosrc.spec.example >> ${PWD}/crave-nosrc.spec
           envsubst < ${PWD}/_service.example >> ${PWD}/_service
-          rm _service.example crave.spec.example
+          rm _service.example crave-nosrc.spec.example
          env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   
