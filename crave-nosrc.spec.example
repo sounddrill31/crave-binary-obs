@@ -6,7 +6,6 @@
 
 %define oname crave
 %define cravedir %{buildroot}/%{oname}
-%define release_tag ${CRAVE_VER}
 
 Summary:    Crave
 Name:       crave
@@ -16,8 +15,8 @@ License:    MPL-2.0
 Group:      Productivity
 URL:        https://crave.io/
 
-Source0:    crave-%{release_tag}-linux-aarch64.bin
-Source1:    crave-%{release_tag}-linux-amd64.bin
+Source0:    crave-${CRAVE_VER}-linux-aarch64.bin
+Source1:    crave-${CRAVE_VER}-linux-amd64.bin
 Source2:    %{oname}.png
 
 BuildRequires:  openssh
@@ -39,9 +38,9 @@ mv %{SOURCE1} %{cravedir}/
 
 %install
 if [ "$(uname -m)" = "x86_64" ]; then
-    install -D %{cravedir}/crave-%{release_tag}-linux-amd64.bin %{buildroot}%{_bindir}/crave
+    install -D %{cravedir}/crave-${CRAVE_VER}-linux-amd64.bin %{buildroot}%{_bindir}/crave
 elif [ "$(uname -m)" = "aarch64" ]; then
-    install -D %{cravedir}/crave-%{release_tag}-linux-aarch64.bin %{buildroot}%{_bindir}/crave
+    install -D %{cravedir}/crave-${CRAVE_VER}-linux-aarch64.bin %{buildroot}%{_bindir}/crave
 fi
 
 %post
@@ -54,12 +53,9 @@ fi
 %defattr(-,root,root)
 %{_bindir}/*
 %dir %{cravedir}
-%{cravedir}/crave-%{release_tag}-linux-aarch64.bin
-%{cravedir}/crave-%{release_tag}-linux-amd64.bin
+%{cravedir}/crave-${CRAVE_VER}-linux-aarch64.bin
+%{cravedir}/crave-${CRAVE_VER}-linux-amd64.bin
 
 Requires: openssh, rsync, openssl
 
 %changelog
-* Thu Jul 18 2024 tex - 0.2-1pclos2024
-- new version
-
