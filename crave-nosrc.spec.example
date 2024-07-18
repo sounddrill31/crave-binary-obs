@@ -48,13 +48,8 @@ fi
 %files
 %defattr(-,root,root)
 %{_bindir}/*
-%dir %{cravedir}
-%{cravedir}/crave-${CRAVE_VER}-linux-aarch64.bin
-%{cravedir}/crave-${CRAVE_VER}-linux-amd64.bin
+%dir
 
 Requires: openssh, rsync, openssl
 
 %changelog
-* Thu Jul 18 2024 tex - 0.2-1pclos2024
-- new version
-
