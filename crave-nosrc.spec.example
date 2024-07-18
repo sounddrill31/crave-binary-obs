@@ -5,7 +5,6 @@
 #
 
 %define oname crave
-%define cravedir %{buildroot}/%{oname}
 
 Summary:    Crave
 Name:       crave
@@ -29,18 +28,15 @@ Unofficial Community Build. Build any open source project in seconds
 
 %prep
 cd %_builddir
-mkdir -p %{cravedir}
-mv %{SOURCE0} %{cravedir}/
-mv %{SOURCE1} %{cravedir}/
 
 %build
 #nobuild
 
 %install
 if [ "$(uname -m)" = "x86_64" ]; then
-    install -D %{cravedir}/crave-${CRAVE_VER}-linux-amd64.bin %{buildroot}%{_bindir}/crave
+    install -D %{SOURCE0} %{buildroot}%{_bindir}/crave
 elif [ "$(uname -m)" = "aarch64" ]; then
-    install -D %{cravedir}/crave-${CRAVE_VER}-linux-aarch64.bin %{buildroot}%{_bindir}/crave
+    install -D %{SOURCE1} %{buildroot}%{_bindir}/crave
 fi
 
 %post
