@@ -1,0 +1,14 @@
+<services>
+  <service name="download_url">
+    <param name="host">github.com</param>
+    <param name="protocol">https</param>
+    <param name="path">/accupara/crave/releases/download/0.2-7023/crave-0.2-7023-linux-aarch64.bin</param>
+    <param name="filename">crave-0.2-7023-linux-aarch64.bin</param>
+  </service>
+  <service name="download_url">
+    <param name="host">github.com</param>
+    <param name="protocol">https</param>
+    <param name="path">/accupara/crave/releases/download/0.2-7023/crave-0.2-7023-linux-amd64.bin</param>
+    <param name="filename">crave-0.2-7023-linux-amd64.bin</param>
+  </service>
+</services>

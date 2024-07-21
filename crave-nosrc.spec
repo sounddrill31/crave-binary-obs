@@ -8,14 +8,14 @@
 
 Summary:    Crave
 Name:       crave
-Version:    ${CRAVE_VER_NO}
+Version:    0.2
 Release:    1
 License:    MPL-2.0
 Group:      Productivity
 URL:        https://crave.io/
 
-Source0:    crave-${CRAVE_VER}-linux-aarch64.bin
-Source1:    crave-${CRAVE_VER}-linux-amd64.bin
+Source0:    crave-0.2-7023-linux-aarch64.bin
+Source1:    crave-0.2-7023-linux-amd64.bin
 Source2:    %{oname}.png
 
 BuildRequires:  openssh
