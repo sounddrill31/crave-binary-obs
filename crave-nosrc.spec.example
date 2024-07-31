@@ -53,6 +53,9 @@ fi
 Requires: openssh, rsync, openssl
 
 %changelog
+* Wed Jul 31 2024 tex - 0.2-1pclos2024
+- new version
+
 * Sun Jul 21 2024 tex - 0.2-1pclos2024
 - new version
 
